@@ -1,0 +1,43 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^localhost/ [NC]
+RewriteRule ^(.*)$ http://localhost/$1 [L,R=301]
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
+php_value max_execution_time 5000
+php_value max_input_time 5000
+
+RewriteRule ^inbox$ inbox.php
+RewriteRule ^acceder$ acceder.php
+RewriteRule ^delete_video$ delete_video.php
+RewriteRule ^watch$ watch.php
+RewriteRule ^get_video$ get_video.php
+RewriteRule ^results$ results.php
+RewriteRule ^my_videos_upload$ my_videos_upload.php
+RewriteRule ^create_account$ create_account.php
+RewriteRule ^login$ login.php
+RewriteRule ^logout$ logout.php
+
+RedirectMatch 403 ^/img/?$
+RedirectMatch 403 ^/channel_backgrounds/?$
+RedirectMatch 403 ^/channel_profile_images/?$
+RedirectMatch 403 ^/includes/?$
+RedirectMatch 403 ^/js/?$
+RedirectMatch 403 ^/templates/?$
+RedirectMatch 403 ^/videos/?$
+RedirectMatch 403 ^/vids_thumbnails/?$
+
+RewriteRule ^vi/no_image/default.jpg$ img/default.jpg
+RewriteRule ^vi/([a-zA-Z0-9-_.]+)/hqdefault.jpg$ vids_thumbnails/$1.jpg
+RewriteRule ^pb/([a-zA-Z0-9.]+).jpg$ channel_backgrounds/$1.jpg
+RewriteRule ^pb/([a-zA-Z0-9.]+).png$ channel_backgrounds/$1.png
+RewriteRule ^pb/([a-zA-Z0-9.]+).gif$ channel_backgrounds/$1.gif
+RewriteRule ^pi/([a-zA-Z0-9.]+).jpg$ channel_profile_images/$1.jpg
+RewriteRule ^pi/([a-zA-Z0-9.]+).png$ channel_profile_images/$1.png
+RewriteRule ^pi/([a-zA-Z0-9.]+).gif$ channel_profile_images/$1.gif
+RewriteRule ^i/default$ img/no_videos_140-vfl121214.png
+RewriteRule ^([a-zA-Z0-9]+)$ profile.php?user=$1
+
+ErrorDocument 500 http://localhost/
+ErrorDocument 404 http://localhost/
+ErrorDocument 403 http://localhost/
+ErrorDocument 401 http://localhost/
